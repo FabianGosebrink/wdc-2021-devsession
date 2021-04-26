@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using server.Hubs;
-using Microsoft.OpenApi.Models;
 using server.Repositories;
 using Microsoft.EntityFrameworkCore;
 using server.Extensions;
@@ -34,7 +32,7 @@ namespace server
 
             services.AddRouting(config => config.LowercaseUrls = true);
             services.AddScoped<ITodoRepository, TodoRepository>();
-            services.AddSignalR();
+
             services.AddMappingProfiles();
 
             services.AddVersioning();
@@ -82,7 +80,6 @@ namespace server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<TodoHub>("/todohub");
             });
         }
     }
