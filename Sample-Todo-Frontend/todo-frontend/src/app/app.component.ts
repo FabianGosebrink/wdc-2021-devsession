@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../environments/environment';
+import { environment } from './../environments/environment';
 import { SignalRService } from './signalr.service';
 import { Todo } from './todo';
 
@@ -11,12 +11,13 @@ import { Todo } from './todo';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  title = 'todo-frontend';
+
   items: Todo[] = [];
   form = new FormGroup({});
 
   constructor(
-    signalrService: SignalRService,
+    private signalrService: SignalRService,
     private readonly http: HttpClient
   ) {
     signalrService.itemAdded.subscribe((item) => this.items.push(item));
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.http.get<Todo[]>(`${environment.apiUrl}todos/`).subscribe((items) => {
       this.items = items;
     });
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  addTodo() {
+  addTodo(): void {
     const toSend = { value: this.form.value.todoValue };
 
     this.http
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
     this.form.reset();
   }
 
-  markAsDone(item: Todo) {
+  markAsDone(item: Todo): void {
     item.done = true;
     this.http
       .put(`${environment.apiUrl}todos/${item.id}`, item)

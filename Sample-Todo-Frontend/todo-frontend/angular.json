@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "bbbd911e-0019-4ed6-b635-0b9602e181a4"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -124,8 +127,5 @@
       }
     }
   },
-  "defaultProject": "todo-frontend",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "todo-frontend"
 }
